@@ -1,0 +1,19 @@
+## Division of samples:
+Train: Counter({'Right-Center': 5595, 'Left-Center': 5047}) 
+Test: Counter({'Right-Center': 255, 'Left-Center': 152})
+
+Test file is: COP23.filt3.sub.json
+
+Model: LinearSVC
+Vectorizer: TFIDF vectorizer
+Completed in 5.5 seconds
+
+              precision    recall  f1-score   support
+
+ Left-Center      0.634     0.605     0.620       152
+Right-Center      0.771     0.792     0.781       255
+
+    accuracy                          0.722       407
+   macro avg      0.703     0.699     0.700       407
+weighted avg      0.720     0.722     0.721       407
+
