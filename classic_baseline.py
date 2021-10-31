@@ -90,21 +90,27 @@ def print_info(model, kernel, criterion, vectorizer, testfile):
         print("Criterion: {}".format(criterion))
 
 
+def create_train_test(train_dir, testfile):
+    """Takes all the train files and the test file create
+    train and test data containing articles and labels"""
+    X_train, Y_train = [], []
+    train_filenames = preprocessing.get_filenames_in_folder(train_dir)
+    for fn in train_filenames:
+        texts, labels = preprocessing.read_corpus(train_dir + '/' + fn)
+        X_train = X_train + texts
+        Y_train = Y_train + labels
+    X_test, Y_test = preprocessing.read_corpus(testfile)
+
+    print("# Division of labels\n\tTrain: {}\n\tTest: {}".format(Counter(Y_train), Counter(Y_test)))
+    return X_train, Y_train, X_test, Y_test
+
+
 if __name__ == "__main__":
     args = create_arg_parser()
 
-    # Get filenames from input (training) directory
-    filenames = preprocessing.get_filenames_in_folder(args.input_dir)
-
     # Create train and test set
     print("## Preprocessing...", file=sys.stderr)
-    X_test, Y_test = preprocessing.read_corpus(args.test_file)
-    X_train, Y_train = [], []
-    for fn in filenames:
-        texts, labels = preprocessing.read_corpus(args.input_dir + '/' + fn)
-        X_train = X_train + texts
-        Y_train = Y_train + labels
-    print("## Division of samples:\nTrain: {} \nTest: {}".format(Counter(Y_train), Counter(Y_test)))
+    X_train, Y_train, X_test, Y_test = create_train_test(args.input_dir, args.test_file)
 
     # Define vectorizer and model, then combine in a pipeline:
     if args.vectorizer == "TFIDF":
