@@ -132,4 +132,4 @@ if __name__ == "__main__":
         # Get names and coefficients for each feature, then show most informative features
         feature_names = clf.named_steps["vec"].get_feature_names()
         coefs = clf.named_steps["cls"].coef_.flatten()
-        show_most_informative(feature_names, coefs, args.mi)
+        show_most_informative(feature_names, coefs, args.most_informative)
