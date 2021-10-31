@@ -1,0 +1,41 @@
+Counter({'Right-Center': 5595, 'Left-Center': 5047})
+Counter({'Right-Center': 255, 'Left-Center': 152})
+
+Ngram_range = 1,2
+
+Test file is: COP23.filt3.sub.json
+
+Model: LinearSVC
+Vectorizer: TF-IDF vectorizer
+Loss: hinge
+              precision    recall  f1-score   support
+
+ Left-Center      0.636     0.645     0.641       152
+Right-Center      0.787     0.780     0.783       255
+
+    accuracy                          0.730       407
+   macro avg      0.711     0.713     0.712       407
+weighted avg      0.730     0.730     0.730       407
+
+Completed in 35.3 seconds
+
+
+Ngram_range = 1,2
+
+Test file is: COP23.filt3.sub.json
+
+Model: LinearSVC
+Vectorizer: TF-IDF vectorizer
+Loss: squared_hinge
+              precision    recall  f1-score   support
+
+ Left-Center      0.643     0.664     0.654       152
+Right-Center      0.796     0.780     0.788       255
+
+    accuracy                          0.737       407
+   macro avg      0.720     0.722     0.721       407
+weighted avg      0.739     0.737     0.738       407
+
+Completed in 18.7 seconds
+
+

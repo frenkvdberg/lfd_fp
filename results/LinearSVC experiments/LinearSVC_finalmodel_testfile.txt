@@ -1,0 +1,21 @@
+# Division of labels
+	Train: Counter({'Right-Center': 5595, 'Left-Center': 5047})
+	Test: Counter({'Right-Center': 324, 'Left-Center': 171})
+
+Test file is: COP24.filt3.sub.json
+Model: LinearSVC
+Vectorizer: TF-IDF vectorizer
+Loss: squared_hinge
+
+              precision    recall  f1-score   support
+
+ Left-Center      0.692     0.643     0.667       171
+Right-Center      0.818     0.849     0.833       324
+
+    accuracy                          0.778       495
+   macro avg      0.755     0.746     0.750       495
+weighted avg      0.775     0.778     0.776       495
+
+Completed in 11.7 seconds
+
+

@@ -1,0 +1,264 @@
+* for all max_df experiments the ngram range is 1,2 and loss is squared_hinge
+
+Counter({'Right-Center': 5595, 'Left-Center': 5047})
+Counter({'Right-Center': 255, 'Left-Center': 152})
+
+ max_df = 0.6
+
+Test file is: COP23.filt3.sub.json
+
+Model: LinearSVC
+Vectorizer: TF-IDF vectorizer
+Loss: squared_hinge
+              precision    recall  f1-score   support
+
+ Left-Center      0.654     0.671     0.662       152
+Right-Center      0.801     0.788     0.794       255
+
+    accuracy                          0.744       407
+   macro avg      0.727     0.730     0.728       407
+weighted avg      0.746     0.744     0.745       407
+
+Completed in 19.1 seconds
+
+
+
+ max_df = 0.62
+
+Test file is: COP23.filt3.sub.json
+
+Model: LinearSVC
+Vectorizer: TF-IDF vectorizer
+Loss: squared_hinge
+              precision    recall  f1-score   support
+
+ Left-Center      0.654     0.671     0.662       152
+Right-Center      0.801     0.788     0.794       255
+
+    accuracy                          0.744       407
+   macro avg      0.727     0.730     0.728       407
+weighted avg      0.746     0.744     0.745       407
+
+Completed in 19.1 seconds
+
+
+
+ max_df = 0.64
+
+Test file is: COP23.filt3.sub.json
+
+Model: LinearSVC
+Vectorizer: TF-IDF vectorizer
+Loss: squared_hinge
+              precision    recall  f1-score   support
+
+ Left-Center      0.654     0.671     0.662       152
+Right-Center      0.801     0.788     0.794       255
+
+    accuracy                          0.744       407
+   macro avg      0.727     0.730     0.728       407
+weighted avg      0.746     0.744     0.745       407
+
+Completed in 19.4 seconds
+
+
+
+ max_df = 0.66
+
+Test file is: COP23.filt3.sub.json
+
+Model: LinearSVC
+Vectorizer: TF-IDF vectorizer
+Loss: squared_hinge
+              precision    recall  f1-score   support
+
+ Left-Center      0.662     0.671     0.667       152
+Right-Center      0.802     0.796     0.799       255
+
+    accuracy                          0.749       407
+   macro avg      0.732     0.734     0.733       407
+weighted avg      0.750     0.749     0.750       407
+
+Completed in 19.6 seconds
+
+
+
+ max_df = 0.68
+
+Test file is: COP23.filt3.sub.json
+
+Model: LinearSVC
+Vectorizer: TF-IDF vectorizer
+Loss: squared_hinge
+              precision    recall  f1-score   support
+
+ Left-Center      0.654     0.671     0.662       152
+Right-Center      0.801     0.788     0.794       255
+
+    accuracy                          0.744       407
+   macro avg      0.727     0.730     0.728       407
+weighted avg      0.746     0.744     0.745       407
+
+Completed in 19.7 seconds
+
+
+
+ max_df = 0.7
+
+Test file is: COP23.filt3.sub.json
+
+Model: LinearSVC
+Vectorizer: TF-IDF vectorizer
+Loss: squared_hinge
+              precision    recall  f1-score   support
+
+ Left-Center      0.654     0.671     0.662       152
+Right-Center      0.801     0.788     0.794       255
+
+    accuracy                          0.744       407
+   macro avg      0.727     0.730     0.728       407
+weighted avg      0.746     0.744     0.745       407
+
+Completed in 19.7 seconds
+
+
+
+ max_df = 0.72
+
+Test file is: COP23.filt3.sub.json
+
+Model: LinearSVC
+Vectorizer: TF-IDF vectorizer
+Loss: squared_hinge
+              precision    recall  f1-score   support
+
+ Left-Center      0.654     0.671     0.662       152
+Right-Center      0.801     0.788     0.794       255
+
+    accuracy                          0.744       407
+   macro avg      0.727     0.730     0.728       407
+weighted avg      0.746     0.744     0.745       407
+
+Completed in 19.7 seconds
+
+
+
+ max_df = 0.74
+
+Test file is: COP23.filt3.sub.json
+
+Model: LinearSVC
+Vectorizer: TF-IDF vectorizer
+Loss: squared_hinge
+              precision    recall  f1-score   support
+
+ Left-Center      0.650     0.671     0.660       152
+Right-Center      0.800     0.784     0.792       255
+
+    accuracy                          0.742       407
+   macro avg      0.725     0.728     0.726       407
+weighted avg      0.744     0.742     0.743       407
+
+Completed in 19.4 seconds
+
+
+
+ max_df = 0.76
+
+Test file is: COP23.filt3.sub.json
+
+Model: LinearSVC
+Vectorizer: TF-IDF vectorizer
+Loss: squared_hinge
+              precision    recall  f1-score   support
+
+ Left-Center      0.654     0.671     0.662       152
+Right-Center      0.801     0.788     0.794       255
+
+    accuracy                          0.744       407
+   macro avg      0.727     0.730     0.728       407
+weighted avg      0.746     0.744     0.745       407
+
+Completed in 19.5 seconds
+
+
+
+ max_df = 0.78
+
+Test file is: COP23.filt3.sub.json
+
+Model: LinearSVC
+Vectorizer: TF-IDF vectorizer
+Loss: squared_hinge
+              precision    recall  f1-score   support
+
+ Left-Center      0.654     0.671     0.662       152
+Right-Center      0.801     0.788     0.794       255
+
+    accuracy                          0.744       407
+   macro avg      0.727     0.730     0.728       407
+weighted avg      0.746     0.744     0.745       407
+
+Completed in 19.6 seconds
+
+
+
+ max_df = 0.8
+
+Test file is: COP23.filt3.sub.json
+
+Model: LinearSVC
+Vectorizer: TF-IDF vectorizer
+Loss: squared_hinge
+              precision    recall  f1-score   support
+
+ Left-Center      0.654     0.671     0.662       152
+Right-Center      0.801     0.788     0.794       255
+
+    accuracy                          0.744       407
+   macro avg      0.727     0.730     0.728       407
+weighted avg      0.746     0.744     0.745       407
+
+Completed in 19.5 seconds
+
+
+
+ max_df = 0.82
+
+Test file is: COP23.filt3.sub.json
+
+Model: LinearSVC
+Vectorizer: TF-IDF vectorizer
+Loss: squared_hinge
+              precision    recall  f1-score   support
+
+ Left-Center      0.649     0.658     0.654       152
+Right-Center      0.794     0.788     0.791       255
+
+    accuracy                          0.740       407
+   macro avg      0.722     0.723     0.722       407
+weighted avg      0.740     0.740     0.740       407
+
+Completed in 19.5 seconds
+
+
+
+ max_df = 0.84
+
+Test file is: COP23.filt3.sub.json
+
+Model: LinearSVC
+Vectorizer: TF-IDF vectorizer
+Loss: squared_hinge
+              precision    recall  f1-score   support
+
+ Left-Center      0.649     0.658     0.654       152
+Right-Center      0.794     0.788     0.791       255
+
+    accuracy                          0.740       407
+   macro avg      0.722     0.723     0.722       407
+weighted avg      0.740     0.740     0.740       407
+
+Completed in 19.6 seconds
+
+
