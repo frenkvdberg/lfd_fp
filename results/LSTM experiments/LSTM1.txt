@@ -1,0 +1,128 @@
+LSTM 100 units, tanh activation, Adam optimzier, lr 0.0005, batch size 16, trainable=False, epochs 10
+
+## Random seed 1234
+
+Accuracy on own dev set: 0.686
+              precision    recall  f1-score   support
+
+           0      0.602     0.467     0.526       152
+           1      0.720     0.816     0.765       255
+
+    accuracy                          0.686       407
+   macro avg      0.661     0.641     0.645       407
+weighted avg      0.676     0.686     0.676       407
+
+Accuracy on own test set: 0.741
+              precision    recall  f1-score   support
+
+           0      0.659     0.520     0.582       171
+           1      0.772     0.858     0.813       324
+
+    accuracy                          0.741       495
+   macro avg      0.716     0.689     0.697       495
+weighted avg      0.733     0.741     0.733       495
+
+
+## Random seed 1235
+
+Accuracy on own dev set: 0.727
+              precision    recall  f1-score   support
+
+           0      0.675     0.520     0.587       152
+           1      0.748     0.851     0.796       255
+
+    accuracy                          0.727       407
+   macro avg      0.712     0.685     0.692       407
+weighted avg      0.721     0.727     0.718       407
+
+Accuracy on own test set: 0.752
+              precision    recall  f1-score   support
+
+           0      0.679     0.532     0.597       171
+           1      0.778     0.867     0.820       324
+
+    accuracy                          0.752       495
+   macro avg      0.729     0.700     0.709       495
+weighted avg      0.744     0.752     0.743       495
+
+
+## Random seed 1236
+
+Accuracy on own dev set: 0.681
+              precision    recall  f1-score   support
+
+           0      0.571     0.579     0.575       152
+           1      0.747     0.741     0.744       255
+
+    accuracy                          0.681       407
+   macro avg      0.659     0.660     0.660       407
+weighted avg      0.681     0.681     0.681       407
+
+Accuracy on own test set: 0.699
+              precision    recall  f1-score   support
+
+           0      0.559     0.608     0.583       171
+           1      0.783     0.747     0.765       324
+
+    accuracy                          0.699       495
+   macro avg      0.671     0.678     0.674       495
+weighted avg      0.706     0.699     0.702       495
+
+
+## Random seed 1237
+
+Accuracy on own dev set: 0.678
+              precision    recall  f1-score   support
+
+           0      0.569     0.572     0.570       152
+           1      0.744     0.741     0.743       255
+
+    accuracy                          0.678       407
+   macro avg      0.656     0.657     0.657       407
+weighted avg      0.679     0.678     0.678       407
+
+Accuracy on own test set: 0.705
+              precision    recall  f1-score   support
+
+           0      0.568     0.608     0.588       171
+           1      0.785     0.756     0.770       324
+
+    accuracy                          0.705       495
+   macro avg      0.677     0.682     0.679       495
+weighted avg      0.710     0.705     0.707       495
+
+
+## Random seed 1238
+
+Accuracy on own dev set: 0.713
+              precision    recall  f1-score   support
+
+           0      0.604     0.671     0.636       152
+           1      0.790     0.737     0.763       255
+
+    accuracy                          0.713       407
+   macro avg      0.697     0.704     0.699       407
+weighted avg      0.720     0.713     0.715       407
+
+Accuracy on own test set: 0.685
+              precision    recall  f1-score   support
+
+           0      0.535     0.667     0.594       171
+           1      0.798     0.694     0.743       324
+
+    accuracy                          0.685       495
+   macro avg      0.667     0.681     0.668       495
+weighted avg      0.707     0.685     0.691       495
+
+
+Mean scores on development set: 
+Accuracy	0.697 (0.019462785)
+Macro F1	0.6706 (0.0210580151)
+Precision	0.677 (0.02300434742)
+Recall		0.6694 (0.02231232843)
+
+Mean scores on test set:
+Accuracy	0.7164 (0.02565618834)
+Macro F1	0.6854 (0.01526564771)
+Precision	0.692 (0.02544012579)
+Recall		0.686 (0.007874007874)

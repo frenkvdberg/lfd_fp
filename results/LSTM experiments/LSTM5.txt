@@ -1,0 +1,72 @@
+Bidirectional LSTM 128 units, sigmoid activation, Nadam optimizer, lr 0.0005, batch size 16, trainable=False, epochs 17
+
+## Random seed 1234
+
+Accuracy on own dev set: 0.713
+              precision    recall  f1-score   support
+
+           0      0.613     0.625     0.619       152
+           1      0.774     0.765     0.769       255
+
+    accuracy                          0.713       407
+   macro avg      0.693     0.695     0.694       407
+weighted avg      0.714     0.713     0.713       407
+
+
+## Random seed 1235
+
+Accuracy on own dev set: 0.639
+              precision    recall  f1-score   support
+
+           0      0.510     0.816     0.628       152
+           1      0.829     0.533     0.649       255
+
+    accuracy                          0.639       407
+   macro avg      0.670     0.675     0.639       407
+weighted avg      0.710     0.639     0.641       407
+
+
+## Random seed 1236
+
+Accuracy on own dev set: 0.666
+              precision    recall  f1-score   support
+
+           0      0.536     0.776     0.634       152
+           1      0.818     0.600     0.692       255
+
+    accuracy                          0.666       407
+   macro avg      0.677     0.688     0.663       407
+weighted avg      0.713     0.666     0.671       407
+
+
+## Random seed 1237
+
+Accuracy on own dev set: 0.671
+              precision    recall  f1-score   support
+
+           0      0.539     0.809     0.647       152
+           1      0.838     0.588     0.691       255
+
+    accuracy                          0.671       407
+   macro avg      0.689     0.699     0.669       407
+weighted avg      0.727     0.671     0.675       407
+
+
+## Random seed 1238
+
+Accuracy on own dev set: 0.69
+              precision    recall  f1-score   support
+
+           0      0.605     0.493     0.543       152
+           1      0.728     0.808     0.766       255
+
+    accuracy                          0.690       407
+   macro avg      0.666     0.651     0.655       407
+weighted avg      0.682     0.690     0.683       407
+
+
+Mean scores on development set:
+Accuracy 	0.6758 (0.02473378257)
+Macro F1	0.664 (0.01806654367)
+Precision	0.679 (0.01048808848)
+Recall		0.6816 (0.01733897344)
