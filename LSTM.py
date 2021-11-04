@@ -37,12 +37,12 @@ python_random.seed(1234)
 
 def create_arg_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-i", "--input_dir", default='train',
-                        help="Input JSON file(s) to learn from (default 'train')")
-    parser.add_argument("-t", "--test_file", default='COP24.filt3.sub.json', type=str,
-                        help="Input JSON file to test on (default 'COP24.filt3.sub.json')")
-    parser.add_argument("-d", "--dev_file", default='COP23.filt3.sub.json', type=str,
-                        help="Input JSON file to test on (default 'COP23.filt3.sub.json')")
+    parser.add_argument("-i", "--input_dir", default='data/train',
+                        help="Input JSON file(s) to learn from (default 'data/train')")
+    parser.add_argument("-t", "--test_file", default='data/COP24.filt3.sub.json', type=str,
+                        help="Input JSON file to test on (default 'data/COP24.filt3.sub.json')")
+    parser.add_argument("-d", "--dev_file", default='data/COP23.filt3.sub.json', type=str,
+                        help="Input JSON file to test on (default 'data/COP23.filt3.sub.json')")
     parser.add_argument("-e", "--embeddings", default='glove_embeddings300.json', type=str,
                         help="Embedding file we are using (default glove_reviews.json)")
     parser.add_argument("-ep", "--epochs", default='22', type=int,
