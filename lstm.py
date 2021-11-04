@@ -21,12 +21,18 @@ from tensorflow.keras.optimizers import SGD, Adam, Nadam
 from tensorflow.keras.layers import TextVectorization
 import tensorflow as tf
 import preprocessing
+from keras.models import load_model
+from pathlib import Path
 from collections import Counter
+
+CACHE_DIR = Path().cwd() / 'cache'
 
 # Make reproducible as much as possible
 np.random.seed(1234)
 tf.random.set_seed(1234)
 python_random.seed(1234)
+
+
 
 
 def create_arg_parser():
@@ -48,6 +54,8 @@ def create_arg_parser():
     parser.add_argument("-o", "--optimizer", default='Nadam', type=str,
                         help="The optimizer to use in training the model, either SGD, "
                              "Adam or Nadam (default Nadam)")
+    parser.add_argument('-c', '--cache', default=False, action='store_true',
+                        help='Load LSTM model from cache file')
     args = parser.parse_args()
     return args
 
@@ -120,8 +128,7 @@ def train_model(model, X_train, Y_train, X_dev, Y_dev, bs, ep):
     verbose = 1
     # Finally fit the model to our data
     model.fit(X_train, Y_train, verbose=verbose, epochs=ep, batch_size=bs, validation_data=(X_dev, Y_dev))
-    # Predict and print evaluation for the model
-    test_set_predict(model, X_dev, Y_dev, "dev")
+    model.save(Path(CACHE_DIR / 'lstm_model.h5'))  # Save the model to disk
     return model
 
 
@@ -151,16 +158,23 @@ def main():
     voc = vectorizer.get_vocabulary()
     emb_matrix = get_emb_matrix(voc, embeddings)
 
-    # Transform string labels to one-hot encodings
+    # Transform string labels to one-hot encodings and transform input to vectorized input
     encoder = LabelBinarizer()
     Y_train_bin = encoder.fit_transform(Y_train)  # Use encoder.classes_ to find mapping back
     Y_dev_bin = encoder.fit_transform(Y_dev)
-
-    # Create model, Transform input to vectorized input and train model
-    model = create_model(emb_matrix, args.learning_rate, args.optimizer)
     X_train_vect = vectorizer(np.array([[s] for s in X_train])).numpy()
     X_dev_vect = vectorizer(np.array([[s] for s in X_dev])).numpy()
-    model = train_model(model, X_train_vect, Y_train_bin, X_dev_vect, Y_dev_bin, args.batch_size, args.epochs,)
+
+    # Either load the saved model from a cache file or create and train it
+    cache_file = Path(CACHE_DIR / 'lstm_model.h5')
+    if args.cache and cache_file.is_file():
+        model = load_model(cache_file)
+    else:
+        model = create_model(emb_matrix, args.learning_rate, args.optimizer)
+        model = train_model(model, X_train_vect, Y_train_bin, X_dev_vect, Y_dev_bin, args.batch_size, args.epochs)
+
+    # Predict and print evaluation for the model
+    test_set_predict(model, X_dev_vect, Y_dev_bin, "dev")
 
     # Do predictions on specified test set
     if args.test_file:
