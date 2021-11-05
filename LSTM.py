@@ -15,7 +15,6 @@ from keras.models import Sequential
 from keras.layers.core import Dense
 from keras.layers import Embedding, LSTM
 from keras.initializers import Constant
-from sklearn.metrics import classification_report
 from sklearn.preprocessing import LabelBinarizer
 from tensorflow.keras.optimizers import SGD, Adam, Nadam
 from tensorflow.keras.layers import TextVectorization
@@ -24,8 +23,10 @@ import preprocessing
 from keras.models import load_model
 from pathlib import Path
 from collections import Counter
+import evaluate
 
 CACHE_DIR = Path().cwd() / 'cache'
+
 
 # Make reproducible as much as possible
 np.random.seed(1234)
@@ -39,8 +40,8 @@ def create_arg_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument("-i", "--input_dir", default='data/train',
                         help="Input JSON file(s) to learn from (default 'data/train')")
-    parser.add_argument("-t", "--test_file", default='data/COP24.filt3.sub.json', type=str,
-                        help="Input JSON file to test on (default 'data/COP24.filt3.sub.json')")
+    parser.add_argument("-t", "--test_file", default='None', type=str,
+                        help="Input JSON file to test on, e.g. 'data/COP24.filt3.sub.json' (default 'None')")
     parser.add_argument("-d", "--dev_file", default='data/COP23.filt3.sub.json', type=str,
                         help="Input JSON file to test on (default 'data/COP23.filt3.sub.json')")
     parser.add_argument("-e", "--embeddings", default='glove_embeddings300.json', type=str,
@@ -51,11 +52,15 @@ def create_arg_parser():
                         help="The learning rate to use in training the model (default 0.0005)")
     parser.add_argument("-b", "--batch_size", default='16', type=int,
                         help="The batch size to use in training the model (default 16)")
-    parser.add_argument("-o", "--optimizer", default='Nadam', type=str,
+    parser.add_argument("-op", "--optimizer", default='Nadam', type=str,
                         help="The optimizer to use in training the model, either SGD, "
                              "Adam or Nadam (default Nadam)")
     parser.add_argument('-c', '--cache', default=False, action='store_true',
                         help='Load LSTM model from cache file')
+    parser.add_argument("-o", "--output_file", default='LSTM_predictions', type=str,
+                        help="The name of the output (pickle) file for the predictions, e.g. 'LSTM_predictions_dev'")
+    parser.add_argument("-ev", "--eval", action="store_true",
+                        help="Evaluate the predictions immediately")
     args = parser.parse_args()
     return args
 
@@ -132,14 +137,14 @@ def train_model(model, X_train, Y_train, X_dev, Y_dev, bs, ep):
     return model
 
 
-def test_set_predict(model, X_test, Y_test, ident):
-    """Do predictions and print a classification report"""
+def test_set_predict(model, X_test):
+    """Do predictions and convert them to the right labels"""
     # Get predictions using the trained model
     Y_pred = model.predict(X_test)
-    # Convert to numerical labels and get a classification report
-    Y_pred = [1 if pred >= 0.5 else 0 for pred in Y_pred]
-    print('Classification report on own {} set:'.format(ident))
-    print(classification_report(Y_test, Y_pred, digits=3, labels=[0, 1], target_names=["Left-Center", "Right-Center"]))
+    # Convert to PO labels
+    Y_pred = ["Right-Center" if pred >= 0.5 else "Left-Center" for pred in Y_pred]
+    return Y_pred
+
 
 
 def main():
@@ -173,16 +178,25 @@ def main():
         model = create_model(emb_matrix, args.learning_rate, args.optimizer)
         model = train_model(model, X_train_vect, Y_train_bin, X_dev_vect, Y_dev_bin, args.batch_size, args.epochs)
 
-    # Predict and print evaluation for the model
-    test_set_predict(model, X_dev_vect, Y_dev_bin, "dev")
-
-    # Do predictions on specified test set
-    if args.test_file:
+    # Predict on testfile if filename is specified, otherwise on dev
+    if args.test_file != 'None':
         # Read in test set, vectorize and predict
         X_test, Y_test = preprocessing.read_corpus(args.test_file, "sent")
-        Y_test_bin = encoder.fit_transform(Y_test)
-        X_test_vect = vectorizer(np.array([[s] for s in X_test])).numpy()
-        test_set_predict(model, X_test_vect, Y_test_bin, "test")
+        X_vect = vectorizer(np.array([[s] for s in X_test])).numpy()
+        Y_bin = encoder.fit_transform(Y_test)
+    else:
+        X_vect = X_dev_vect
+        Y_bin = Y_dev_bin
+
+    # Predict and save predictions
+    predictions = test_set_predict(model, X_vect)
+    evaluate.create_prediction_file(args.output_file, predictions)
+
+    # Optionally: print classification report
+    if args.eval:
+        gold_labels = ["Right-Center" if binary_label == 1 else "Left-Center" for binary_label in Y_bin]
+        evaluate.print_report(gold_labels, predictions)
+
 
 if __name__ == '__main__':
     main()

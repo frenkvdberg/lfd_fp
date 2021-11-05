@@ -7,8 +7,6 @@ binary classification task. Optionally, a confusion matrix can be printed.
 Authors: Esther Ploeger, Frank van den Berg
 """
 
-
-from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.dummy import DummyClassifier
 import sys
 import argparse
@@ -21,7 +19,7 @@ from sklearn.tree import DecisionTreeClassifier
 import time
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import LinearSVC, SVC
-
+import evaluate
 import preprocessing
 
 
@@ -43,8 +41,10 @@ def create_arg_parser():
     parser.add_argument("-v", "--vectorizer", default='count', type=str,
                         help="Vectorizer to combine with the classifier. "
                              "Either 'count' or 'TFIDF' (default 'count')")
-    parser.add_argument("-cm", "--confusion_matrix", action="store_true",
-                        help="Print a confusion matrix")
+    parser.add_argument("-o", "--output_file", default='NB_predictions', type=str,
+                        help="The name of the output (pickle) file for the predictions, e.g. NB_predictions_dev")
+    parser.add_argument("-ev", "--eval", action="store_true",
+                        help="Evaluate the predictions immediately")
     args = parser.parse_args()
     return args
 
@@ -126,10 +126,10 @@ if __name__ == "__main__":
     t0 = time.time()
     classifier.fit(X_train, Y_train)
     Y_pred = classifier.predict(X_test)
-    print("Completed in {:.1f} seconds\n".format(time.time() - t0))
-    print(classification_report(Y_test, Y_pred, digits=3, zero_division=0))
 
-    # Optional: print a confusion matrix
-    if args.confusion_matrix:
-        print_cm(Y_test, Y_pred)
+    # Save predictions
+    evaluate.create_prediction_file(args.output_file, Y_pred)
 
+    # Optional: evaluate predictions by printing a classification report
+    if args.eval:
+        evaluate.print_report(Y_test, Y_pred)

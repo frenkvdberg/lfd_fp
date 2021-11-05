@@ -11,13 +11,13 @@ Authors: Esther Ploeger, Frank van den Berg
 import argparse
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.pipeline import Pipeline
-from sklearn.metrics import classification_report
 from sklearn.svm import LinearSVC, SVC
 from collections import Counter
 import sys
 import time
 import preprocessing
 import pandas as pd
+import evaluate
 
 
 def create_arg_parser():
@@ -48,6 +48,10 @@ def create_arg_parser():
                              "vectorizer (default=0.32)")
     parser.add_argument("-mi", "--most_informative", default=0, type=int,
                         help="Print the N most informative features (default 0")
+    parser.add_argument("-o", "--output_file", default='SVM_predictions', type=str,
+                        help="The name of the output (pickle) file for the predictions, e.g. 'SVM_predictions_dev")
+    parser.add_argument("-ev", "--eval", action="store_true",
+                        help="Evaluate the predictions immediately")
 
     args = parser.parse_args()
     return args
@@ -116,18 +120,20 @@ if __name__ == "__main__":
     clf = Pipeline([('vec', vec), ('cls', svm_model)])
     print_info(args.model, args.kernel, args.test_file, args.loss)
 
-    # Predict the political orientation for the articles
+    # Predict the political orientation for the articles and print runtime
     print("## Predicting...", file=sys.stderr)
     t0 = time.time()
     clf.fit(X_train, Y_train)
     Y_pred = clf.predict(X_test)
-
-    # Report the precision, recall, f1-score and accuracy scores along with the runtime
     runtime = time.time() - t0
-    print(classification_report(Y_test, Y_pred, digits=3))
     print("Completed in {:.1f} seconds\n\n".format(runtime))
 
-    # Optionally, show N most informative features:
+    # Save predictions
+    evaluate.create_prediction_file(args.output_file, Y_pred)
+
+    # Optionally, evaluate and/or show N most informative features:
+    if args.eval:
+        evaluate.print_report(Y_test, Y_pred)
     if args.most_informative > 0:
         # Get names and coefficients for each feature, then show most informative features
         feature_names = clf.named_steps["vec"].get_feature_names()
