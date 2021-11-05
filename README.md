@@ -19,3 +19,26 @@ $ pip install -r requirements.txt
 ### Training the models and testing on unseen data
 Vertellen hoe de verschillende modellen gebruikt kunnen worden om te trainen en te testen, waarbij een output file wordt aangemaakt.
 En dat er met de optie -ev meteen een classification report geprint kan worden, maar dat een evaluatie ook los kan door evaluate.py te gebruiken. 
+
+#### NB
+```bash
+$ python NB.py -t data/COP24.filt3.sub.json -o NB_test -ev
+```
+For each model, we can use the -t parameter to specify the file that we want to test on;
+The -o parameter is used to specify the filename for the output (pickle-)file that the predictions are saved in;
+The -ev parameter gives us the option to print a classifcation report right away (Instead of evaluating output files using evaluate.py, which we will discuss later).
+A list of all the possible command line arguments can be requested with the -h option.
+
+#### SVM
+```bash
+$ python SVM.py -t data/COP24.filt3.sub.json -o SVM_test -ev
+```
+Note that we do not use a pretrained model for the SVM, since it takes our best model only 11 seconds to predict on unseen data.
+
+#### LSTM
+```bash
+$ python LSTM.py -c -t data/COP24.filt3.sub.json -o LSTM_test -ev
+```
+Here we use the -c parameter to specify that we want to use the trained model that is stored in the cache directory. (If there is no model saved in there, the model will train normally and then be saved automatically).
+
+#### BERT
