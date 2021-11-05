@@ -8,7 +8,8 @@ Then extract the zip file into the cache directory<br />
 2. DOWNLOAD BERT MODEL -- HIER LINK<br />
 3. Run the setup.sh shell script that will create a 'train' directory containing the COP files from 1 to 22, it also extracts the GloVe embeddings:
 ```bash
-$ code to run shellscript
+$ chmod +x ./setup.sh
+$ sh ./setup.sh
 ``` 
 4. Install all dependencies by running the following command:
 ```bash
