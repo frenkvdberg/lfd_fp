@@ -2,10 +2,10 @@
 
 ### Retrieving all the necessary files and setting up
 Before we can run the models, we first need to make sure that we have access to all the files by following these steps:
-1. Download the trained lstm model as a .zip file from dropbox using this link:\
+1. Download the trained lstm model as a .zip file from dropbox using this link:<br />
 https://www.dropbox.com/s/cojnks0t2w15vbp/lstm_model.zip?dl=0<br />
-Then extract the zip file into the cache directory\
-2. DOWNLOAD BERT MODEL -- HIER LINK\
+Then extract the zip file into the cache directory<br />
+2. DOWNLOAD BERT MODEL -- HIER LINK<br />
 3. Run the setup.sh shell script that will create a 'train' directory containing the COP files from 1 to 22, it also extracts the GloVe embeddings:
 ```bash
 $ code to run shellscript
@@ -17,29 +17,29 @@ $ pip install -r requirements.txt
 
 
 ### Training the models and testing on unseen data
-Vertellen hoe de verschillende modellen gebruikt kunnen worden om te trainen en te testen, waarbij een output file wordt aangemaakt.\
+Vertellen hoe de verschillende modellen gebruikt kunnen worden om te trainen en te testen, waarbij een output file wordt aangemaakt.<br />
 En dat er met de optie -ev meteen een classification report geprint kan worden, maar dat een evaluatie ook los kan door evaluate.py te gebruiken. 
 
 #### NB
 ```bash
 $ python NB.py -t data/COP24.filt3.sub.json -o NB_test -ev
 ```
-For each model, we can use the -t parameter to specify the file that we want to test on;\
-The -o parameter is used to specify the filename for the output (pickle-)file that the predictions are saved in;\
-The -ev parameter gives us the option to print a classifcation report right away (Instead of evaluating output files using evaluate.py, which we will discuss later).\
+For each model, we can use the -t parameter to specify the file that we want to test on;<br />
+The -o parameter is used to specify the filename for the output (pickle-)file that the predictions are saved in;<br />
+The -ev parameter gives us the option to print a classifcation report right away (Instead of evaluating output files using evaluate.py, which we will discuss later).<br />
 A list of all the possible command line arguments can be requested with the -h option.
 
 #### SVM
 ```bash
 $ python SVM.py -t data/COP24.filt3.sub.json -o SVM_test -ev
 ```
-Note that we do not use a pretrained model for the SVM, since it takes our best model only 11 seconds to predict on unseen data.\
+Note that we do not use a pretrained model for the SVM, since it takes our best model only 11 seconds to predict on unseen data.<br />
 
 #### LSTM
 ```bash
 $ python LSTM.py -c -t data/COP24.filt3.sub.json -o LSTM_test -ev
 ```
-Here we use the -c parameter to specify that we want to use the trained model that is stored in the cache directory. (If there is no model saved in there, the model will train normally and then be saved automatically).\
+Here we use the -c parameter to specify that we want to use the trained model that is stored in the cache directory. If there is no model saved in this directory, the model will train normally and after that the model will be saved automatically into this directory.
 
 #### BERT
 
@@ -51,6 +51,6 @@ While each model can print a classification report when we use the -ev option, w
 $ python evaluate.py -i output/SVMtest -t data/COP24.filt3.sub.json -cm
 ```
 
-With -i we can specify which output file we want to evaluate. Each output file is a pickle file containing a list of predicted labels.\
-With -t we specify which test file is used to obtain the gold labels;\
+With -i we can specify which output file we want to evaluate. Each output file is a pickle file containing a list of predicted labels.<br />
+With -t we specify which test file is used to obtain the gold labels;<br />
 The -cm option can be used to print a confusion matrix.
