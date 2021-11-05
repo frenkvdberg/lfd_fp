@@ -42,3 +42,15 @@ $ python LSTM.py -c -t data/COP24.filt3.sub.json -o LSTM_test -ev
 Here we use the -c parameter to specify that we want to use the trained model that is stored in the cache directory. (If there is no model saved in there, the model will train normally and then be saved automatically).
 
 #### BERT
+
+
+### Evaluating output files
+While each model can print a classification report when we use the -ev option, we can also use evaluate.py to run the evaluation of a given output file:
+
+```bash
+$ python evaluate.py -i output/SVMtest -t data/COP24.filt3.sub.json -cm
+```
+
+With -i we can specify which output file we want to evaluate. Each output file is a pickle file containing a list of predicted labels.
+With -t we specify which test file is used to obtain the gold labels;
+The -cm option can be used to print a confusion matrix.
