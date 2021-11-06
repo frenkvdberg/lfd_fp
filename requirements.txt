@@ -2,4 +2,5 @@ sklearn
 nltk
 pandas
 keras
+numpy
 tensorflow
