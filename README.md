@@ -8,14 +8,14 @@ Then extract 'lstm_model.h5' from the zip file and put it into the cache directo
 2. DOWNLOAD BERT MODEL -- HIER LINK<br />
 3. Run the setup.sh shell script that will create a 'train' directory* containing the COP files from 1 to 22, it also extracts the GloVe embeddings:
 ```bash
-$ chmod +x ./setup.sh
-$ sh ./setup.sh
+chmod +x ./setup.sh
+sh ./setup.sh
 ``` 
 \* note that for this script to work, we expect the all the COP files to be in the directory 'data', since we can not upload it ourselves.
 
 4. Install all dependencies by running the following command:
 ```bash
-$ pip install -r requirements.txt
+pip install -r requirements.txt
 ``` 
 
 
@@ -25,7 +25,7 @@ En dat er met de optie -ev meteen een classification report geprint kan worden, 
 
 #### NB
 ```bash
-$ python NB.py -t data/COP24.filt3.sub.json -o NB_test -ev
+python NB.py -t data/COP24.filt3.sub.json -o NB_test -ev
 ```
 For each model, we can use the -t parameter to specify the file that we want to test on;<br />
 The -o parameter is used to specify the filename for the output (pickle-)file that the predictions are saved in;<br />
