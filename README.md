@@ -11,7 +11,7 @@ Then extract 'lstm_model.h5' from the zip file and put it into the cache directo
 $ chmod +x ./setup.sh
 $ sh ./setup.sh
 ``` 
-* note that for this to work, we expect the all the COP files to be in the directory 'data', since we can not upload it ourselves.
+\* note that for this to work, we expect the all the COP files to be in the directory 'data', since we can not upload it ourselves.
 
 4. Install all dependencies by running the following command:
 ```bash
