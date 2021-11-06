@@ -1,2 +1,5 @@
 sklearn
 nltk
+pandas
+keras
+tensorflow
