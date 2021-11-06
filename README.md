@@ -34,13 +34,13 @@ A list of all the possible command line arguments can be requested with the -h o
 
 #### SVM
 ```bash
-$ python SVM.py -t data/COP24.filt3.sub.json -o SVM_test -ev
+python SVM.py -t data/COP24.filt3.sub.json -o SVM_test -ev
 ```
 Note that we do not use a pretrained model for the SVM, since it takes our best model only 11 seconds to predict on unseen data.<br />
 
 #### LSTM
 ```bash
-$ python LSTM.py -c -t data/COP24.filt3.sub.json -o LSTM_test -ev
+python LSTM.py -c -t data/COP24.filt3.sub.json -o LSTM_test -ev
 ```
 Here we use the -c parameter to specify that we want to use the trained model that is stored in the cache directory. If there is no model saved in this directory, the model will train normally and after that the model will be saved automatically into this directory.
 
@@ -51,7 +51,7 @@ Here we use the -c parameter to specify that we want to use the trained model th
 While each model can print a classification report when we use the -ev option, we can also use evaluate.py to run the evaluation of a given output file:
 
 ```bash
-$ python evaluate.py -i output/SVMtest -t data/COP24.filt3.sub.json -cm
+python evaluate.py -i output/SVMtest -t data/COP24.filt3.sub.json -cm
 ```
 
 With -i we can specify which output file we want to evaluate. Each output file is a pickle file containing a list of predicted labels.<br />
