@@ -29,7 +29,7 @@ python NB.py -t data/COP24.filt3.sub.json -o NB_test -ev
 ```
 For each model, we can use the -t parameter to specify the file that we want to test on;<br />
 The -o parameter is used to specify the filename for the output (pickle-)file that the predictions are saved in;<br />
-The -ev parameter gives us the option to print a classifcation report right away (Instead of evaluating output files using evaluate.py, which we will discuss later).<br />
+The -ev parameter gives us the option to print a classifcation report right away (While we can also evaluate output files using evaluate.py, which we will discuss later).<br />
 A list of all the possible command line arguments can be requested with the -h option.
 
 #### SVM
