@@ -92,6 +92,8 @@ def read_corpus(filename, tokens='word'):
             elif tokens == 'sent':
                 t = word_tokenize(body)
                 texts.append(" ".join(t).strip())
+            elif tokens == 'words_full':
+                texts.append(" ".join(word_tokenize(body)))
             labels.append(label)
 
     return texts, labels
