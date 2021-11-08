@@ -15,7 +15,7 @@ from transformers import AutoTokenizer
 from sklearn.preprocessing import LabelBinarizer
 import numpy as np
 import tensorflow as tf
-from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.optimizers import SGD, Adam, Nadam
 from collections import Counter
 import nltk
 import preprocessing
@@ -40,6 +40,15 @@ def create_arg_parser():
                         help="The name of the output (pickle) file for the predictions, e.g. 'LM_predictions_test'")
     parser.add_argument('-c', '--cache', default=False, action='store_true',
                         help='Load LM weights from cache file')
+    parser.add_argument("-ep", "--epochs", default='1', type=int,
+                        help="The number of epochs to use in training the model (default 1)")
+    parser.add_argument("-lr", "--learning_rate", default='0.00001', type=float,
+                        help="The learning rate to use in training the model (default 0.00001)")
+    parser.add_argument("-b", "--batch_size", default='16', type=int,
+                        help="The batch size to use in training the model (default 16)")
+    parser.add_argument("-op", "--optimizer", default='Adam', type=str,
+                        help="The optimizer to use in training the model, either SGD, "
+                             "Adam or Nadam (default Adam)")
     args = parser.parse_args()
     return args
 
@@ -60,12 +69,19 @@ def create_train_test(train_dir, testfile, devfile):
     return X_train, Y_train, X_test, Y_test, X_dev, Y_dev
 
 
-def create_model():
+def get_optimizer(optimizer, lr):
+    """Get optimizer with the specified learning rate"""
+    optimizers = {"adam": Adam(learning_rate=lr),
+                  "nadam": Nadam(learning_rate=lr),
+                  "sgd": SGD(learning_rate=lr)}
+    return optimizers[optimizer.lower()]
+
+
+def create_model(learning_rate, optim):
     """Create the Keras model to use"""
     model = TFAutoModelForSequenceClassification.from_pretrained("bert-base-uncased", num_labels=2)
     loss_function = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
-    learning_rate = 0.00005
-    optim = Adam(learning_rate=learning_rate)
+    optim = get_optimizer(optim, learning_rate)
     model.compile(loss=loss_function, optimizer=optim, metrics=["accuracy"])
 
     return model
@@ -73,7 +89,6 @@ def create_model():
 
 def train_model(model, tokens_train, Y_train_bin, tokens_dev, Y_dev_bin):
     """Train the created model using the specified settings"""
-    verbose = 1
     # Fit the model to our data
     model.fit(tokens_train, Y_train_bin, verbose=1, epochs=1, batch_size=16, validation_data=(tokens_dev, Y_dev_bin))
 
@@ -104,7 +119,7 @@ if __name__ == "__main__":
     Y_test_bin = encoder.fit_transform(Y_test)
 
     # Create model
-    model = create_model()
+    model = create_model(args.learning_rate, args.optimizer)
 
     # Create BERT input tokens
     tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
