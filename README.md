@@ -22,8 +22,7 @@ pip install -r requirements.txt
 
 
 ### Training the models and testing on unseen data
-Vertellen hoe de verschillende modellen gebruikt kunnen worden om te trainen en te testen, waarbij een output file wordt aangemaakt.<br />
-En dat er met de optie -ev meteen een classification report geprint kan worden, maar dat een evaluatie ook los kan door evaluate.py te gebruiken. 
+Training the model and making the predictions can be done using the follow commands for each model:
 
 #### NB
 ```bash
