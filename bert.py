@@ -22,8 +22,9 @@ import preprocessing
 import evaluate
 from pathlib import Path
 
-CACHE_DIR = Path().cwd() / 'cache'
+CACHE_DIR = Path().cwd()
 nltk.download('punkt')
+
 
 def create_arg_parser():
     parser = argparse.ArgumentParser()
@@ -49,11 +50,11 @@ def create_train_test(train_dir, testfile, devfile):
     X_train, Y_train = [], []
     train_filenames = preprocessing.get_filenames_in_folder(train_dir)
     for fn in train_filenames:
-        texts, labels = preprocessing.read_corpus(train_dir + '/' + fn)
+        texts, labels = preprocessing.read_corpus(train_dir + '/' + fn, "words_full")
         X_train = X_train + texts
         Y_train = Y_train + labels
-    X_test, Y_test = preprocessing.read_corpus(testfile)
-    X_dev, Y_dev = preprocessing.read_corpus(devfile)
+    X_test, Y_test = preprocessing.read_corpus(testfile, "words_full")
+    X_dev, Y_dev = preprocessing.read_corpus(devfile, "words_full")
 
     print("# Division of labels\n\tTrain: {}\n\tTest: {}\n\tDev: {}".format(Counter(Y_train), Counter(Y_test), Counter(Y_dev)))
     return X_train, Y_train, X_test, Y_test, X_dev, Y_dev
@@ -68,6 +69,7 @@ def create_model():
     model.compile(loss=loss_function, optimizer=optim, metrics=["accuracy"])
 
     return model
+
 
 def train_model(model, tokens_train, Y_train_bin, tokens_dev, Y_dev_bin):
     """Train the created model using the specified settings"""
@@ -111,7 +113,7 @@ if __name__ == "__main__":
     tokens_dev = tokenizer(X_dev, padding=True, max_length=250, truncation=True, return_tensors="np").data
 
     # Either load the saved model from a cache file or create and train it
-    cache_file = Path('/seed_1234/bert_weights_1234')
+    cache_file = Path(CACHE_DIR / 'cache/BERT_seed_1234/bert_weights_1234')
     if args.cache:
         model.load_weights(cache_file)
     else:
