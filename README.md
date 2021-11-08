@@ -48,7 +48,7 @@ Here we use the -c parameter to specify that we want to use the trained model th
 
 #### BERT
 ```bash
-python LM.py -c -t data/COP24.filt3.sub.json -o LM_test -ev
+python bert.py -c -t data/COP24.filt3.sub.json -o LM_test -ev
 ```
 Here, we use the -c parameter to specify that we want to use the weights that are stored in the cache directory.
 
