@@ -47,7 +47,10 @@ python LSTM.py -c -t data/COP24.filt3.sub.json -o LSTM_test -ev
 Here we use the -c parameter to specify that we want to use the trained model that is stored in the cache directory. If there is no model saved in this directory, the model will train normally and after that the model will be saved automatically into this directory.
 
 #### BERT
-
+```bash
+python LM.py -c -t data/COP24.filt3.sub.json -o LM_test -ev
+```
+Here, we use the -c parameter to specify that we want to use the weights that are stored in the cache directory.
 
 ### Evaluating output files
 While each model can print a classification report when we use the -ev option, we can also use evaluate.py to run the evaluation of a given output file:
