@@ -19,7 +19,7 @@ sh ./setup.sh
 ```bash
 pip install -r requirements.txt
 ``` 
-
+<hr style="border:2px solid gray"> </hr>
 
 ### Training the models and testing on unseen data
 Training the model and making the predictions can be done using the follow commands for each model:
@@ -50,8 +50,6 @@ Here we use the -c parameter to specify that we want to use the trained model th
 python bert.py -c -t data/COP24.filt3.sub.json -o LM_test -ev
 ```
 Here, we use the -c parameter to specify that we want to use the weights that are stored in the cache directory.
-
-<hr style="border:2px solid gray"> </hr>
 
 <hr style="border:2px solid gray"> </hr>
 
