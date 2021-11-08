@@ -6,9 +6,9 @@ Before we can run the models, we first need to make sure that we have access to 
 1. Download the trained lstm model as a .zip file from dropbox using this link:<br />
 https://www.dropbox.com/s/cojnks0t2w15vbp/lstm_model.zip?dl=0<br />
 Then extract 'lstm_model.h5' from the zip file and put it into the cache directory (which was empty before) <br />
-2. Download the lm weights as a .zip file from google drive using this link:<br />
+2. Download the lm weights directory (called 'BERT_seed_1234) as a .zip file from google drive using this link:<br />
 https://drive.google.com/drive/folders/10TzwInvX-22RjvXH56fHWXo0Y2xT9mHY?usp=sharing
-Then extract the directory and put it into the cache directory <br />
+Then extract the directory 'BERT_seed_1234' and put this directory with its contents into the cache directory <br />
 4. Run the setup.sh shell script that will create a 'train' directory* containing the COP files from 1 to 22, it also extracts the GloVe embeddings:
 ```bash
 chmod +x ./setup.sh
