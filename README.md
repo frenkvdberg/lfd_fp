@@ -1,4 +1,5 @@
-# lfd_fp
+# Predicting the source of Australian climate-related newspaper articles
+## Learning from Data 2021-2022: Final Project
 
 ### Retrieving all the necessary files and setting up
 Before we can run the models, we first need to make sure that we have access to all the files by following these steps:
