@@ -30,9 +30,9 @@ def create_arg_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument("-i", "--input_dir", default='data/train',
                         help="Input JSON file(s) to learn from (default 'data/train')")
-    parser.add_argument("-t", "--test_file", default='COP24.filt3.sub.json', type=str,
+    parser.add_argument("-t", "--test_file", default='data/COP24.filt3.sub.json', type=str,
                         help="Input JSON file to test on (default 'data/COP24.filt3.sub.json')")
-    parser.add_argument("-d", "--dev_file", default='COP23.filt3.sub.json', type=str,
+    parser.add_argument("-d", "--dev_file", default='data/COP23.filt3.sub.json', type=str,
                         help="Input JSON file to test on (default 'data/COP23.filt3.sub.json')")
     parser.add_argument("-ev", "--eval", action="store_true",
                         help="Evaluate the predictions immediately")
