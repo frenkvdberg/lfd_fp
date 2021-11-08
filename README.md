@@ -51,6 +51,10 @@ python bert.py -c -t data/COP24.filt3.sub.json -o LM_test -ev
 ```
 Here, we use the -c parameter to specify that we want to use the weights that are stored in the cache directory.
 
+<hr style="border:2px solid gray"> </hr>
+
+<hr style="border:2px solid gray"> </hr>
+
 ### Evaluating output files
 While each model can print a classification report when we use the -ev option, we can also use evaluate.py to run the evaluation of a given output file:
 
