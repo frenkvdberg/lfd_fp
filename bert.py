@@ -3,8 +3,7 @@
 """
 Further trains a pre-trained BERT model to
 perform our binary classification task. Different parameter settings can
-be specified with command line arguments. Also, optionally, the N most informative
-features can be printed.
+be specified with command line arguments. 
 Authors: Esther Ploeger, Frank van den Berg
 """
 
